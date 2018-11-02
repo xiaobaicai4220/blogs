@@ -1,0 +1,28 @@
+/**
+ * @name:icon.css
+ * @explain: 保存icon样式
+ */
+ .icon{
+    display: inline-block;
+    width:5vw;
+    height:5vw;
+    background-size:100% 100%;
+}
+.icon-home{
+    background-image:url('../image/svg/home.svg')
+}
+.icon-classify{
+    background-image:url('../image/svg/classify.svg')
+}
+.icon-file{
+    background-image:url('../image/svg/file.svg');
+}
+.icon-collection{
+    background-image:url('../image/svg/collection.svg');
+}
+.icon-info{
+    background-image:url('../image/svg/info.svg');
+}
+.icon-menu{
+    background-image:url('../image/svg/menu.svg');
+}

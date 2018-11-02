@@ -1,0 +1,394 @@
+<html>
+
+<head>
+    <title>小白菜的文本编辑页</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        .header{
+            position:fixed;
+            width:100vw;
+            background-color: #222222;
+            padding: 5px 0 5px 0;
+            top:0;
+            left:0;
+        }
+        .container{
+            width:90vw;
+            margin: 0 auto;
+        }
+        .name{
+            display: block;
+            color: #e9e9e9;
+            text-shadow: 0 0 2px gainsboro;
+            font-size: 16px;
+            padding-left:2vw;
+            float:left;
+        }
+        .time{
+            display:block;
+            color: #e9e9e9;
+            text-shadow: 0 0 2px gainsboro;
+            font-size: 16px;
+            padding-right:2vw;
+            float:right;
+        }
+        
+        .icon{
+            width:28px;
+            height:28px;
+        }
+        .icon-code{
+            background-image:url('./image/svg/code.svg');
+            background-size: 100% 100%;
+            display:inline-block;
+            float:right;
+        }
+        .icon-code:hover{
+            background-color:#aaaaaa;
+        }
+
+        .content{
+            width:94vw;
+            border: 1px solid #d2d2d2;
+            margin-top:10vw;
+            margin:10vw auto;
+        }
+        .title-container{
+            background-color:#eeeeee; 
+            height:28px;
+            line-height:28px;
+        }
+        .input-title{
+            height:24px;
+            position:relative;
+            bottom:2px;
+            width:60vw;
+        }
+        #editor{
+            width:92vw;
+            margin:2vw auto;
+            border:1px solid red;
+            height:85vh;
+            overflow-y:scroll; 
+        }
+        .add-label{
+            display: inline-block;
+            width:10vw;
+            font-size:16px;
+            border:1px solid red;
+        }
+        .content-img{
+            width:80vw;
+        }
+        #commit-btn{
+            border:1px solid red;
+            width:20vw;
+            font-size:18px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <span class="name">小白菜的编辑器</span>
+        <span class="time"></span>
+    </div>
+    <div class="content">
+        <div class="title-container">
+            <label>标题:</label>
+            <input class="input-title" type="text" placeholder="请输入标题">
+            <label class="icon icon-code"></label>
+        </div>
+        <div contenteditable="true" id="editor">
+            <p><br></p>
+        </div>
+        <div class="tag-container">
+            <label>标签:</label>
+            <input type="text" style="display:none" id="tag-input" placeholder="输入新标签名">
+            <div class="add-label"><span class="icon-add">+</span><span class="tag-add">添加新标签</span></div>
+        </div>
+        <div class="tag-list">
+            <span class="tag-list-item"><input type="checkbox" name="tag" value="css" />CSS</span>
+            <span class="tag-list-item"><input type="checkbox" name="tag" value="HTML" />HTML</span>
+            <span class="tag-list-item"><input type="checkbox" name="tag" value="JavaScript" />JavaScript</span>
+            <span class="tag-list-item"><input type="checkbox" name="tag" value="美好生活" />美好生活</span>
+            <span class="tag-list-item"><input type="checkbox" name="tag" value="游戏世界" />游戏世界</span>
+        </div>
+        <div class="commit">
+            <input type="checkbox" name="isSecret" value="secret">设为私密
+            <span id="commit-btn">发布博客</span>
+        </div>
+    </div>
+
+</body>
+<script>
+    window.onload = function () {
+        /* 模拟数据 */
+        const classify_data = [{
+            'id': '010',
+            'category': 'CSS',
+        }, {
+            'id': '011',
+            'category': 'html',
+        }, {
+            'id': '012',
+            'category': 'JavaScript'
+        }, {
+            'id': '013',
+            'category': '外文翻译'
+        }, {
+            'id': '014',
+            'category': '闲来随笔'
+        }, {
+            'id': '015',
+            'category': '美好生活'
+        }, {
+            'id': '016',
+            'category': '游戏世界'
+        }]
+
+        /*传给后端的article*/
+        const article = {
+            'time':null,
+            'title':null,
+            'tags':[],
+            'isSecret':false,
+            'text':[],
+            'children':[{
+                'title':null,
+                'text':[],
+                'children':[/*...*/],
+            },{
+                'title':null,
+                'text':[],
+                'children':[/*...*/],
+            }]
+        }
+        /* article数据例子 */
+        const article_text = {
+            'time':'20181102160638',
+            'title':'HTML中元素居中的N种方式',
+            'tags':['HTML','CSS','JavaScript','编程生活'],
+            'isSecret':false,
+            'text':[{
+                    'type':'text',
+                    'data':'在编写页面时，元素居中是特别常见的需求，下面将介绍几种元素居中的方法'
+                },{
+                    'type':'text',
+                    'data':'好了,我们现在就开始介绍吧'
+                }],
+            'children':[{
+                'title':'一&nbsp;使用0&nbsp;auto',
+                'text':[{
+                    'type':'text',
+                    'data':'&nbsp;&nbsp;&nbsp;&nbsp;0&nbsp;auto应该是实现元素居中最常用的一种方式了'
+                },{
+                    'type':'text',
+                    'data':'具体实现方式如下:'
+                },{
+                    'type':'code',
+                    'data':['<title>小白菜的演示</title>','&nbsp;&nbsp;&nbsp;&nbsp;<div id=\"container\"></div>']
+                },{
+                    'type':'text',
+                    'data':'具体效果如下'
+                },{
+                    'type':'img',
+                    'data':'传到后台的图片数据使用base64格式'
+                }],
+                'children':[{
+                    'title':'1.1&nbsp;使用动画',
+                    'text':[{
+                        'type':'text',
+                        'data':'可以使用动画来使元素居中'
+                    }]
+                }]
+            }]
+
+        }
+
+        /*  获取需要的元素对象  */
+        const page = {
+            time              : document.getElementsByClassName('time')[0],
+            titleInput        : document.getElementsByClassName('input-title')[0],
+            editor            : document.getElementById('editor'),
+            tagContainer      : document.getElementsByClassName('tag-container')[0],
+            tagInput          : document.getElementById('tag-input'),
+            addTag            : document.getElementsByClassName('add-label')[0],
+            tagCheckBox       : document.getElementsByName('tag'),
+            isSecretCheckBox  : document.getElementsByName('isSecret'),
+            commitBtn         : document.getElementById('commit-btn'),
+            tagList           : document.getElementsByClassName('tag-list')[0],
+        }
+
+        /*  处理界面右上角的时间  */
+        setInterval(function () {
+            var temp = new Date();
+            page.time.innerHTML = temp.getFullYear() + '-' + (temp.getMonth() + 1) + '-' + temp.getDate() + ' ' + temp.getHours() + ':' + temp.getMinutes() + ':' + temp.getSeconds();
+        }, 1000)
+
+        /* 事件监听绑定 */
+        page.addTag.addEventListener('click',function(){
+            console.log('添加节点');
+            taggleTagInput();
+        })
+        page.commitBtn.addEventListener('click',function(){
+            console.log('提交文章');
+            commitArticle();
+        })
+
+        /*  复制粘贴事件  */
+        setPaste();
+        function setPaste() {
+            //粘贴事件
+            document.addEventListener('paste', function (event) {
+
+                if (event.clipboardData || event.originalEvent) {
+                    var clipboardData = (event.clipboardData || event.originalEvent.clipboardData);
+                    if (clipboardData.items) {
+                        var isImage = false;
+                        for (var i = 0; i < clipboardData.items.length; i++) {
+                            if (clipboardData.items[i].type.indexOf("image") !== -1) {
+                                var blob;
+                                blob = clipboardData.items[i].getAsFile();
+                                isImage = true;
+                                var render = new FileReader();
+                                render.onload = function (evt) {
+                                    //输出base64编码
+                                    var base64 = evt.target.result;
+                                    var img = document.createElement('img');
+                                    img.classList.add('content-img');
+                                    img.setAttribute('src', base64);
+                                    editor.appendChild(img);
+                                    //document.getElementById('img').setAttribute('src', base64);
+                                }
+                                render.readAsDataURL(blob);
+                            }
+                        }
+                        //如果不是image
+                        if (!isImage) {
+                            var str1 = clipboardData.getData("text");
+                            var div = document.createElement('div');
+                            div.innerHTML = str1;
+                            editor.appendChild(div);
+                            console.log(str1);
+                            event.preventDefault();
+                        }
+                    }
+
+                }
+
+            })
+
+        }
+
+        //监听一个组合建 cd 当同时按下cd键时 跳到codeing 模式
+
+        var keyCodeArry = [];
+        document.onkeydown = function (ev) {
+            var oEvent = ev || event;
+            keyCode = oEvent.keyCode;
+            keyCodeArry = addKeyCodeArry(keyCode, keyCodeArry);
+            //console.log(keyCodeArry);
+            doKeyFunc(oEvent,keyCodeArry);
+        }
+        document.onkeyup = function (ev) {
+            var oEvent = ev || event;
+            keyCode = oEvent.keyCode;
+            keyCodeArry = deletKeyCodeArry(keyCode, keyCodeArry);
+            //console.log(keyCodeArry);
+        }
+        function addKeyCodeArry(num, arr) {
+            var check = 0;
+            for (var i = 0; i < arr.length; i++) {
+                if (arr[i] == num) {
+                    check = 1;
+                }
+            }
+            if (check == 0) {
+                arr.push(num);
+            }
+            return arr;
+        }
+        function deletKeyCodeArry(num, arr) {
+            for (var i = 0; i < arr.length; i++) {
+                if (arr[i] == num) {
+                    arr.splice(i, 1);
+                }
+            }
+            return arr;
+        }
+        
+        //判断keyCodeArray中的值 并执行相应事件
+        function doKeyFunc(e,keyCodeArry){
+            if(keyCodeArry.length === 1)
+            {
+                /*
+                if(keyCodeArry[0] == 9)
+                {
+                    console.log('你按下了tab键');
+                }
+                else
+                if(keyCodeArry[0] == 13)
+                {
+                    console.log('你按下了center键');
+                    if(focusTarget == 'titleTarget')
+                    {
+                        
+                    }
+                } */
+            }
+            else
+            if(keyCodeArry.length === 2)
+            {
+                if((keyCodeArry[0] == 67 && keyCodeArry[1] == 68)||(keyCodeArry[0] == 68 && keyCodeArry[1] == 67))
+                {
+                    e.preventDefault();
+                    console.log('启动codeing模式');
+                }
+            }
+        }
+
+        function getCheckBoxValue(checkboxList){
+            const checkboxValue = [];
+            for(let i =0;i<checkboxList.length;i++){
+                if(checkboxList[i].checked){
+                    checkboxValue.push(checkboxList.value);
+                }
+            }
+            return checkboxValue;
+        }
+
+        /*taggleTagInput：改变tagInput的状态*/
+        function taggleTagInput(){
+            if(page.tagInput.style.display == 'none'){
+                page.tagInput.style.display = 'inline-block';
+            }else{
+                page.tagInput.style.display = 'none';
+            }
+        }
+        /*添加新标签*/
+        function addTag(tagValue){
+            const span = document.createElement('span');
+            const input = document.createElement('input');
+            input.value = tagValue;
+            input.type = "checkbox";
+            input.name = "tag";
+            span.class = "tag-list-item";
+            span.appendChild(input);
+            page.tagList.appendChild(span);
+        }
+
+        /* 提交文章 */
+        function commitArticle(){
+
+        }
+
+
+    }
+</script>
+
+</html>

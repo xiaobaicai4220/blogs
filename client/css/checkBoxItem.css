@@ -1,0 +1,18 @@
+/**
+ * @name:checkBoxItem.css
+ * @explain: 保存选择框和其子元素的样式
+ */
+
+.classify-item{
+    display: inline-block;
+    padding:2px 2px 3px 3px;
+    border:1px solid red;
+    border-radius:10px;
+    margin:10px 10px 10px 10px;
+}
+.classify-item-text{
+    color:#3Ba1d2;
+}
+.classify-item-count{
+    color:#99ddf2;
+}

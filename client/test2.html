@@ -1,0 +1,53 @@
+<style>
+    *{
+        margin:0;
+        padding:0;
+    }
+    .scale-container{
+        width:100vw;
+        border:1px solid blue;
+    }
+    .scale-container-trangle{
+        height: 0px;
+        width: 0px;
+        border-left: 5vw solid transparent;
+        border-right: 5vw solid transparent;
+        border-bottom: 5vw solid #9E9E9E;
+    }
+    .scale-container-body{
+        border:1px solid red;
+        width:90vw;
+        height:50vw;
+        margin:0 auto;
+    }
+    .showMenuItemF{
+        transform-origin: 5vw 0;
+        animation-duration: 0.8s;
+		animation-play-state: paused;
+		animation-fill-mode: both;
+		animation-name: showMenuItem;
+		animation-play-state: running;
+		animation-delay: 0.2s;
+		display: block;
+    }
+    @keyframes showMenuItem{
+        0%{
+            transform: scale(0.01,0.01);
+        }
+        100%{
+            transform: scale(1,1);
+        }
+    }
+</style>
+
+<body>
+    <div class="scale-container showMenuItemF">
+        <div class="scale-container-trangle">
+
+        </div>
+        <div class="scale-container-body">
+
+        </div>
+    </div>
+    
+</body>

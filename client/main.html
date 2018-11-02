@@ -1,0 +1,413 @@
+<html>
+    <head>
+        <title>小白菜的博客主页</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <style>
+            *{
+                margin:0;
+                padding:0;
+            }
+            .header{
+                padding-top:8px;
+            }
+            .header-menu{
+                width:300px;
+                height: 51px;
+                display: flex;
+                margin:0 auto;
+                margin-bottom:20px;
+           
+                
+            }
+            .header-menu a{
+                display: block;
+                color:#545454;
+                flex-grow:1;
+               
+               
+            }
+            .icon-container{
+                width:30px;
+                margin: 0 auto;
+              
+                font-size:12px;
+                text-align: center;
+            }
+            .hide{
+                display: none;
+            }
+            .icon-menu{
+                position: fixed;
+                top:0px;
+                left:50vw;
+                background-image:url('./image/svg/menu.svg');
+                margin-top:9px;
+                opacity: 0;
+                margin-left:-14px;
+            }
+            .main{
+                height:110vh;
+                
+                margin:0 auto;
+            }
+            .content{
+                margin:0 auto;
+                width:90vw;
+               
+            }
+            .content-header{
+                margin: 0 auto;
+                width:70vw;
+                
+            }
+            .content-header a{
+                display: block;
+                text-align: center;
+                text-decoration: none;
+            }
+            .content-header-name{
+                background-color:#222222;
+                color:#fffeff;
+                text-shadow:0 0 10px gainsboro ;
+                font-size:5vw;
+                padding:1vw 0 1vw 0;
+                border-radius:5vw;
+                margin-top:20vw;
+            }
+            .content-header-signature{
+                width:50vw;
+                margin:0 auto;
+                color:#ABAAAF;
+                font-size:4vw;
+                padding-top:4vw;
+                padding-bottom:30vw;
+            }
+
+            .content-body{
+                width:90vw;
+                margin:0 auto;
+                margin-top:20px;
+               
+                
+            }
+
+            .content-body-item{
+                margin-bottom:20px;
+                border-radius:4px;
+            }
+            .content-body-item p{
+                width:100%;
+                margin-top:5px;
+                margin-bottom:5px;
+            }
+            .content-body-item-header{
+                font-size:6vw;
+                color:#535353;
+            }
+            .content-body-item-classify{
+                font-size:4vw;
+                color:#ABAAAF;
+            }
+            
+            .content-body-item-summary{
+                color:#635e5e;
+                font-size:4vw;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .background{
+                height:100vh;
+                width:100vw;
+                position:fixed;
+                z-index:-1;
+                background-color:linear-gradient(top,#ccc,#000);
+                top:0;
+                left:0;
+            }
+
+        </style>
+        <link rel="stylesheet" href="./css/icon.css" type="text/css" />
+        <link rel="stylesheet" href="./css/animation.css" type="text/css" />
+        <link rel="stylesheet" href="./css/scaleCheckBox.css" type="text/css" />
+        <link rel="stylesheet" href="./css/checkBoxItem.css" type="text/css" />
+    </head>
+    <body>
+        <!-- 顶部导航条 -->
+        <div class="header">
+            <!--  导航类别条  -->
+            <div class="header-menu">
+                <a  class="header-home toright5">
+                    <div class="icon-container">
+                        <span class="icon icon-home"></span>
+                        <span>首页</span>
+                    </div>
+                </a>
+                <a class="header-classify toright4">
+                    <div class="icon-container">
+                        <span class="icon icon-classify"></span>
+                        <span>分类</span>    
+                    </div>
+                </a>
+                <a class="header-file toright3">
+                    <div class="icon-container">
+                        <span class="icon icon-file"></span>
+                        <span>归档</span>
+                    </div>
+                </a>
+                <a class="header-collection toright2">
+                    <div class="icon-container">
+                        <span class="icon icon-collection"></span>
+                        <span>收藏</span>
+                    </div>
+                </a>
+                <a class="header-info toright1">
+                    <div class="icon-container">
+                        <span class="icon icon-info"></span>
+                        <span>关于</span>
+                    </div>
+                </a>
+            </div>
+            <!--  单独导航菜单  -->
+           <!--  <span class="icon icon-menu "></span> -->
+            <div class="classify-checkbox">
+
+            </div>
+
+        </div>
+        <!--  主区域  -->
+        <div class="main">
+            <!--  正文区域  -->
+            <div class="content">
+                <!--  正文头部  -->
+                <div class="content-header">
+                    <a class="content-header-name" href="#">小白菜的空间</a>
+                    <a class="content-header-signature">人生若只如初见，何事秋风悲画扇</a>
+                </div>
+                <!--  正文内容区域  -->
+                <div class="content-body">
+                    <!--  正文内容子元素  -->
+                    <div class="content-body-item">
+                        <p class="content-body-item-header">
+                            同一设备维护不同git项目
+                        </p>
+                        <p class="content-body-item-classify">
+                            <span class="content-body-item-icon content-body-item-icon-date"></span>
+                            <span>2018-07-14</span>
+                            <span>git</span>
+                            <span>维护</span>
+                        </p>
+                        <p class="content-body-item-summary">
+                                问题背景当公司配的电脑和自己的一毛一样，那么自己的电脑基本就准备吃灰了，
+                                同时本来在自己电脑
+                        </p>
+                    </div>
+                    <div class="content-body-item">
+                        <p class="content-body-item-header">
+                            HTML中元素居中的n种实现
+                        </p>
+                        <p class="content-body-item-classify">
+                            <span>2018-10-24</span>
+                            <span>HTML</span>
+                            <span>CSS</span>
+                        </p>
+                        <p class="content-body-item-summary">
+                                1:margin:0&nbsp;auto;&nbsp;2：display:inline-block;text-align:center;&nbsp;3:transform&nbsp;4:position:relative;position:absolute;
+                        </p>
+                    </div>
+                    <div class="content-body-item">
+                            <p class="content-body-item-header">
+                                同一设备维护不同git项目
+                            </p>
+                            <p class="content-body-item-classify">
+                                <span class="content-body-item-icon content-body-item-icon-date"></span>
+                                <span>2018-07-14</span>
+                                <span>git</span>
+                                <span>维护</span>
+                            </p>
+                            <p class="content-body-item-summary">
+                                    问题背景当公司配的电脑和自己的一毛一样，那么自己的电脑基本就准备吃灰了，
+                                    同时本来在自己电脑
+                            </p>
+                    </div>
+                    <div class="content-body-item">
+                                <p class="content-body-item-header">
+                                    同一设备维护不同git项目
+                                </p>
+                                <p class="content-body-item-classify">
+                                    <span class="content-body-item-icon content-body-item-icon-date"></span>
+                                    <span>2018-07-14</span>
+                                    <span>git</span>
+                                    <span>维护</span>
+                                </p>
+                                <p class="content-body-item-summary">
+                                        问题背景当公司配的电脑和自己的一毛一样，那么自己的电脑基本就准备吃灰了，
+                                        同时本来在自己电脑
+                                </p>
+                    </div>
+                </div>
+            </div>
+            <!--  侧边栏区域  -->
+            <div class="sidebar">
+                这里是侧边栏目
+            </div>
+        </div>
+        <!--  底部  -->
+        <div class="footer">
+            这里是底部
+        </div>
+        <!--  背景 -->
+        <div class="background">
+
+        </div>
+    </body>
+    <script>
+        window.onload = function () {
+            //初始数据
+            const classifyData = {
+                'CSS':'2',
+                'HTML':'3',
+                'javascript':'4',
+                '设计模式':'5',
+                'jquery':'6',
+                'vue':'2',
+                'jquery':'3',
+            }
+            const fileData = {
+                '2018-10':'10',
+                '2018-9':'32',
+                '2018-8':'13',
+                '2018-7':'0',
+                '2018-6':'54',
+            }
+            const collectionData = {
+                '知名博客':'32',
+                '官方文档':'23',
+                '设计网站':'45',
+                '同性交友':'12',
+            }
+
+
+            //创建元素并插入到页面中
+            const mask                        =   document.createElement('div');
+            const scaleContainer              =   document.createElement('div');
+            const scaleContainerTrangle       =   document.createElement('div');
+            const scaleContainerBody          =   document.createElement('div');
+            const scaleContainerBodyContent   =   document.createElement('div');
+            mask.classList.add('mask');
+            scaleContainer.classList.add('scale-container');
+            scaleContainerTrangle.classList.add('scale-container-trangle');
+            scaleContainerBody.classList.add('scale-container-body');
+            scaleContainerBodyContent.classList.add('scale-container-body-content');
+            scaleContainerBody.appendChild(scaleContainerBodyContent);
+            scaleContainer.appendChild(scaleContainerTrangle);
+            scaleContainer.appendChild(scaleContainerBody);
+            mask.append(scaleContainer);
+            document.body.appendChild(mask);
+
+            //创建节点
+            const home            =   document.createElement('div');
+            const classify        =   document.createElement('div');
+            const file            =   document.createElement('div');
+            const collection      =   document.createElement('div');
+            const info            =   document.createElement('div');
+            home.innerHTML      =   '页面正在加载';
+            classify.innerHTML  =   '页面正在加载';
+            file.innerHTML      =   '页面正在加载';
+            collection.innerHTML=   '页面正在加载';
+            info.innerHTML      =   '页面正在加载';
+            
+            //模拟ajax获取数据
+            setTimeout(function(){
+                classify.innerHTML = "";
+                for(const dataItem in classifyData){
+                    const item = document.createElement('p');
+                    item.innerHTML = "<span class='classify-item-text'>"+dataItem +"</span><span class='classify-item-count'>(" + classifyData[dataItem] + ")</span>";
+                    item.id = dataItem;
+                    item.classList.add('classify-item');
+                    classify.appendChild(item);
+                }
+            },300)
+
+            const headerMenu    =   document.getElementsByClassName('header-menu')[0];
+            headerMenu.addEventListener('click', function (e) {
+                if (e.target) {
+                    //缓存e.target
+                    let target = e.target;
+                    /**
+                     * 获取点击的按钮元素
+                     * 并根据点击的元素插入节点
+                     */
+                    let itemClassName;
+                    while(target!==headerMenu){
+                        if(target.tagName.toLowerCase() == 'a'){
+                            itemClassName = target.className.split(' ').filter(function(item){
+                                return !item.indexOf('header');
+                            });
+                            console.log(itemClassName);
+                            e.stopPropagation();
+                            break;
+                        }
+                        target = target.parentNode;
+                    }
+                    
+                    //清除节点中原来的节点
+                    scaleContainerBodyContent.innerHTML = "";
+                    switch(itemClassName[0]){
+                        case 'header-home':
+                            scaleContainerBodyContent.appendChild(home);
+                            break;
+                        case 'header-classify':
+                            scaleContainerBodyContent.appendChild(classify);
+                            break;
+                        case 'header-file':
+                            scaleContainerBodyContent.appendChild(file);
+                            break;
+                        case 'header-collection':
+                            scaleContainerBodyContent.appendChild(collection);
+                            break;
+                        case 'header-info':
+                            scaleContainerBodyContent.appendChild(info);
+                            break;
+                        default:
+                            console.error('插入节点出错'+'itemClassName'+itemClassName);
+                            break;
+                    }
+
+
+                    //获取点击了的元素x轴中心位置
+                    var positionX                           =   (target.getBoundingClientRect().left + target.getBoundingClientRect().right)/2;
+                    //设置缩放容器中三角形的位置:
+                    scaleContainerTrangle.style.left        =   positionX;
+                    //设置缩放容器的缩放中心点
+                    var strTemp                             =   positionX + "px 0";
+                    scaleContainer.style.transformOrigin    =   strTemp;
+                    
+                    
+                    //启动动画
+                    mask.classList.add('show');
+                    scaleContainer.classList.add('showMenuItemF');
+                    //动画完成后删除动画,
+                    setTimeout(function(){
+                        scaleContainer.classList.remove('showMenuItemF');
+                    },400);
+                }
+            });
+
+            //注册整体mask事件监听
+            mask.addEventListener('click',function(e){
+                //元素缩回去
+                scaleContainer.classList.add('hideMenuItemF');
+                mask.classList.add('hide');
+                mask.classList.remove('show');
+                setTimeout(function(){
+                    mask.classList.remove('hide');
+                    scaleContainer.classList.remove('hideMenuItemF');
+                },400);
+
+                
+            })
+
+        }
+    </script>
+</html>
