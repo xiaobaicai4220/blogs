@@ -108,7 +108,7 @@
         </div>
         <div class="tag-container">
             <label>标签:</label>
-            <input type="text" style="display:none" id="tag-input" placeholder="输入新标签名">
+            <input type="text" id="tag-input" placeholder="输入新标签名">
             <div class="add-label"><span class="icon-add">+</span><span class="tag-add">添加新标签</span></div>
         </div>
         <div class="tag-list">
@@ -153,57 +153,57 @@
 
         /*传给后端的article*/
         const article = {
-            'time':null,
-            'title':null,
-            'tags':[],
-            'isSecret':false,
-            'text':[],
-            'children':[{
-                'title':null,
-                'text':[],
-                'children':[/*...*/],
-            },{
-                'title':null,
-                'text':[],
-                'children':[/*...*/],
+            'time': null,
+            'title': null,
+            'tags': [],
+            'isSecret': false,
+            'text': [],
+            'children': [{
+                'title': null,
+                'text': [],
+                'children': [/*...*/],
+            }, {
+                'title': null,
+                'text': [],
+                'children': [/*...*/],
             }]
         }
         /* article数据例子 */
         const article_text = {
-            'time':'20181102160638',
-            'title':'HTML中元素居中的N种方式',
-            'tags':['HTML','CSS','JavaScript','编程生活'],
-            'isSecret':false,
-            'text':[{
-                    'type':'text',
-                    'data':'在编写页面时，元素居中是特别常见的需求，下面将介绍几种元素居中的方法'
-                },{
-                    'type':'text',
-                    'data':'好了,我们现在就开始介绍吧'
+            'time': '20181102160638',
+            'title': 'HTML中元素居中的N种方式',
+            'tags': ['HTML', 'CSS', 'JavaScript', '编程生活'],
+            'isSecret': false,
+            'text': [{
+                'type': 'text',
+                'data': '在编写页面时，元素居中是特别常见的需求，下面将介绍几种元素居中的方法'
+            }, {
+                'type': 'text',
+                'data': '好了,我们现在就开始介绍吧'
+            }],
+            'children': [{
+                'title': '一&nbsp;使用0&nbsp;auto',
+                'text': [{
+                    'type': 'text',
+                    'data': '&nbsp;&nbsp;&nbsp;&nbsp;0&nbsp;auto应该是实现元素居中最常用的一种方式了'
+                }, {
+                    'type': 'text',
+                    'data': '具体实现方式如下:'
+                }, {
+                    'type': 'code',
+                    'data': ['<title>小白菜的演示</title>', '&nbsp;&nbsp;&nbsp;&nbsp;<div id=\"container\"></div>']
+                }, {
+                    'type': 'text',
+                    'data': '具体效果如下'
+                }, {
+                    'type': 'img',
+                    'data': '传到后台的图片数据使用base64格式'
                 }],
-            'children':[{
-                'title':'一&nbsp;使用0&nbsp;auto',
-                'text':[{
-                    'type':'text',
-                    'data':'&nbsp;&nbsp;&nbsp;&nbsp;0&nbsp;auto应该是实现元素居中最常用的一种方式了'
-                },{
-                    'type':'text',
-                    'data':'具体实现方式如下:'
-                },{
-                    'type':'code',
-                    'data':['<title>小白菜的演示</title>','&nbsp;&nbsp;&nbsp;&nbsp;<div id=\"container\"></div>']
-                },{
-                    'type':'text',
-                    'data':'具体效果如下'
-                },{
-                    'type':'img',
-                    'data':'传到后台的图片数据使用base64格式'
-                }],
-                'children':[{
-                    'title':'1.1&nbsp;使用动画',
-                    'text':[{
-                        'type':'text',
-                        'data':'可以使用动画来使元素居中'
+                'children': [{
+                    'title': '1.1&nbsp;使用动画',
+                    'text': [{
+                        'type': 'text',
+                        'data': '可以使用动画来使元素居中'
                     }]
                 }]
             }]
@@ -212,16 +212,16 @@
 
         /*  获取需要的元素对象  */
         const page = {
-            time              : document.getElementsByClassName('time')[0],
-            titleInput        : document.getElementsByClassName('input-title')[0],
-            editor            : document.getElementById('editor'),
-            tagContainer      : document.getElementsByClassName('tag-container')[0],
-            tagInput          : document.getElementById('tag-input'),
-            addTag            : document.getElementsByClassName('add-label')[0],
-            tagCheckBox       : document.getElementsByName('tag'),
-            isSecretCheckBox  : document.getElementsByName('isSecret'),
-            commitBtn         : document.getElementById('commit-btn'),
-            tagList           : document.getElementsByClassName('tag-list')[0],
+            time: document.getElementsByClassName('time')[0],
+            titleInput: document.getElementsByClassName('input-title')[0],
+            editor: document.getElementById('editor'),
+            tagContainer: document.getElementsByClassName('tag-container')[0],
+            tagInput: document.getElementById('tag-input'),
+            addTag: document.getElementsByClassName('add-label')[0],
+            tagCheckBox: document.getElementsByName('tag'),
+            isSecretCheckBox: document.getElementsByName('isSecret'),
+            commitBtn: document.getElementById('commit-btn'),
+            tagList: document.getElementsByClassName('tag-list')[0],
         }
 
         /*  处理界面右上角的时间  */
@@ -231,11 +231,12 @@
         }, 1000)
 
         /* 事件监听绑定 */
-        page.addTag.addEventListener('click',function(){
+        page.addTag.addEventListener('click', function () {
             console.log('添加节点');
-            taggleTagInput();
+            //taggleTagInput();
+            addTag();
         })
-        page.commitBtn.addEventListener('click',function(){
+        page.commitBtn.addEventListener('click', function () {
             console.log('提交文章');
             commitArticle();
         })
@@ -271,9 +272,9 @@
                         //如果不是image
                         if (!isImage) {
                             var str1 = clipboardData.getData("text");
-                            var div = document.createElement('div');
-                            div.innerHTML = str1;
-                            editor.appendChild(div);
+                            var p = document.createElement('p');
+                            p.innerHTML = str1;
+                            editor.appendChild(p);
                             console.log(str1);
                             event.preventDefault();
                         }
@@ -292,14 +293,12 @@
             var oEvent = ev || event;
             keyCode = oEvent.keyCode;
             keyCodeArry = addKeyCodeArry(keyCode, keyCodeArry);
-            //console.log(keyCodeArry);
-            doKeyFunc(oEvent,keyCodeArry);
+            doKeyFunc(oEvent, keyCodeArry);
         }
         document.onkeyup = function (ev) {
             var oEvent = ev || event;
             keyCode = oEvent.keyCode;
             keyCodeArry = deletKeyCodeArry(keyCode, keyCodeArry);
-            //console.log(keyCodeArry);
         }
         function addKeyCodeArry(num, arr) {
             var check = 0;
@@ -321,41 +320,21 @@
             }
             return arr;
         }
-        
+
         //判断keyCodeArray中的值 并执行相应事件
-        function doKeyFunc(e,keyCodeArry){
-            if(keyCodeArry.length === 1)
-            {
-                /*
-                if(keyCodeArry[0] == 9)
-                {
-                    console.log('你按下了tab键');
-                }
-                else
-                if(keyCodeArry[0] == 13)
-                {
-                    console.log('你按下了center键');
-                    if(focusTarget == 'titleTarget')
-                    {
-                        
-                    }
-                } */
-            }
-            else
-            if(keyCodeArry.length === 2)
-            {
-                if((keyCodeArry[0] == 67 && keyCodeArry[1] == 68)||(keyCodeArry[0] == 68 && keyCodeArry[1] == 67))
-                {
+        function doKeyFunc(e, keyCodeArry) {
+            if (keyCodeArry.length === 2) {
+                if ((keyCodeArry[0] == 67 && keyCodeArry[1] == 68) || (keyCodeArry[0] == 68 && keyCodeArry[1] == 67)) {
                     e.preventDefault();
                     console.log('启动codeing模式');
                 }
             }
         }
 
-        function getCheckBoxValue(checkboxList){
+        function getCheckBoxValue(checkboxList) {
             const checkboxValue = [];
-            for(let i =0;i<checkboxList.length;i++){
-                if(checkboxList[i].checked){
+            for (let i = 0; i < checkboxList.length; i++) {
+                if (checkboxList[i].checked) {
                     checkboxValue.push(checkboxList.value);
                 }
             }
@@ -363,15 +342,19 @@
         }
 
         /*taggleTagInput：改变tagInput的状态*/
-        function taggleTagInput(){
-            if(page.tagInput.style.display == 'none'){
+        function taggleTagInput() {
+            if (page.tagInput.style.display == 'none') {
                 page.tagInput.style.display = 'inline-block';
-            }else{
+            } else {
                 page.tagInput.style.display = 'none';
             }
         }
         /*添加新标签*/
-        function addTag(tagValue){
+        function addTag() {
+            const tagValue = page.tagInput.value;
+            if (tagValue == '') {
+                return;
+            }
             const span = document.createElement('span');
             const input = document.createElement('input');
             input.value = tagValue;
@@ -379,12 +362,73 @@
             input.name = "tag";
             span.class = "tag-list-item";
             span.appendChild(input);
+            span.innerHTML = span.innerHTML + tagValue;
             page.tagList.appendChild(span);
         }
 
-        /* 提交文章 */
-        function commitArticle(){
+       
+        const pageValue = { 
+            /*  获得时间,  以'20181102160638'的形式返回  */
+            getTime() 
+            {
+                let timeStr = '';
+                const time = new Date();
 
+                function formatValue(value) {
+                    if (value < 10) {
+                        return '0' + value;
+                    } else {
+                        return value;
+                    }
+                }
+                return timeStr + time.getFullYear() + formatValue(time.getMonth()) + formatValue(time.getDate())
+                    + formatValue(time.getHours()) + formatValue(time.getMinutes()) + formatValue(time.getSeconds());
+            },
+            getTitle()
+            {
+                return page.titleInput.value;
+            },
+            getTags()
+            {
+                return getCheckBoxValue(page.tagCheckBox);
+            },
+            getIsSecret()
+            {
+                const isSecret = getCheckBoxValue(page.isSecretCheckBox);
+                if(isSecret.length >0){
+                    return true;
+                }
+                return false;
+            }
+        }
+
+        /*  获取页面中元素中的文本  */
+        function getText() {
+
+        }
+
+
+        const article = {
+            'time': null,
+            'title': null,
+            'tags': [],
+            'isSecret': false,
+            'text': [],
+            'children': [{
+                'title': null,
+                'text': [],
+                'children': [/*...*/],
+            }, {
+                'title': null,
+                'text': [],
+                'children': [/*...*/],
+            }]
+        }
+
+        /* 提交文章 */
+        function commitArticle(article) {
+            //获取元素的值
+            article
         }
 
 
